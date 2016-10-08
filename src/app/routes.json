@@ -1,0 +1,7 @@
+[{
+  "path": "",
+  "component": "LoginComponent"
+}, {
+  "path": "**",
+  "component": "PageNotFoundComponent"
+}]

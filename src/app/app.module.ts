@@ -2,12 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+
+import appRoutes from './app.routes';
+import { FooterModule } from './common/footer/footer.module';
+import { HeaderModule } from './common/header/header.module';
+import { LoginModule } from './common/login/login.module';
 
 import { AppComponent } from './app.component';
-import { AngularFireModule } from 'angularfire2';
 
-// Must export the config
-export const firebaseConfig = require("../firebase.conf.json");
+const firebaseConfig = require("../firebase.conf.json");
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+}
 
 @NgModule({
   declarations: [
@@ -17,7 +25,11 @@ export const firebaseConfig = require("../firebase.conf.json");
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    FooterModule,
+    HeaderModule,
+    LoginModule,
+    appRoutes,
   ],
   providers: [],
   bootstrap: [AppComponent]
