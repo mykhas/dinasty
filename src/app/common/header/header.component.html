@@ -1,3 +1,16 @@
-<p>
-  header works!
-</p>
+<header>
+  <div class="container">
+    <div class="six columns">
+      <div class="title">Dinasty</div>
+    </div>
+    <div class="six columns">
+      <div *ngIf="!(af.auth | async)?.auth">
+        <a role="button" class="u-pull-right" (click)="login()">Log In with Facebook</a>
+      </div>
+      <div *ngIf="(af.auth | async)?.auth">
+        <span> {{ (af.auth | async)?.auth?.email }} </span>
+        <a role="button" class="u-pull-right" (click)="logout()">Log Out</a>
+      </div>
+    </div>
+  </div>
+</header>

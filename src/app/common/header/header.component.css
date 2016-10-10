@@ -1,0 +1,9 @@
+header {
+  height: 1.8em;
+  background: #000000;
+  color: #cccccc;
+}
+
+header .columns a {
+  cursor: pointer;
+}

@@ -1,13 +1,8 @@
-import { RouterModule }   from '@angular/router';
-
-import { LoginComponent } from './common/login/login.component';
+import { RouterModule }   from "@angular/router";
 
 const routes = [{
   "path": "",
-  "component": LoginComponent
-}, {
-  "path": "**",
-  "component": LoginComponent
+  "loadChildren": "app/unit/unit.module#UnitModule"
 }];
 
 export default RouterModule.forRoot(routes);

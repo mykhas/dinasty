@@ -7,14 +7,13 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import appRoutes from './app.routes';
 import { FooterModule } from './common/footer/footer.module';
 import { HeaderModule } from './common/header/header.module';
-import { LoginModule } from './common/login/login.module';
 
 import { AppComponent } from './app.component';
 
 const firebaseConfig = require("../firebase.conf.json");
 const myFirebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
+  provider: AuthProviders.Facebook,
+  method: AuthMethods.Popup
 }
 
 @NgModule({
@@ -28,7 +27,6 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
     FooterModule,
     HeaderModule,
-    LoginModule,
     appRoutes,
   ],
   providers: [],
