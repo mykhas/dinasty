@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let item of items | async">
+    <input type="text" #updatetext [value]="item | json" />
+  </li>
+</ul>
+
+<a routerLink="create">Create new Unit</a>

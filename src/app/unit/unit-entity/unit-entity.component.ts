@@ -3,12 +3,12 @@ import {ActivatedRoute} from "@angular/router";
 import "rxjs/add/operator/map";
 
 @Component({
-  selector: 'app-unit',
-  templateUrl: './unit.component.html',
-  styleUrls: ['./unit.component.css']
+  selector: 'app-unit-entity',
+  templateUrl: './unit-entity.component.html',
+  styleUrls: ['./unit-entity.component.css']
 })
-export class UnitComponent implements OnInit {
-
+export class UnitEntityComponent implements OnInit {
+  
   id;
 
   constructor(route:ActivatedRoute) {
