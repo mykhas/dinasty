@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { UnitService } from '../unit.service';
 
 @Component({
   selector: 'app-unit-list',
@@ -9,8 +10,8 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 export class UnitListComponent implements OnInit {
   items: FirebaseListObservable<any>;
 
-  constructor(af: AngularFire) {
-    this.items = af.database.list('/units');
+  constructor(af: AngularFire, unitService:UnitService) {
+    this.items = unitService.getList();
   }
 
   ngOnInit() {

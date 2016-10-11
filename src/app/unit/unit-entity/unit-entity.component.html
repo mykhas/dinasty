@@ -1,3 +1,17 @@
+<div *ngIf="true">
+  <h2>Create new team</h2>
+
+  <form (ngSubmit)="create(unitName.value)">
+    <div class="row">
+      <div class="eight columns">
+        <label for="exampleEmailInput">Your team name</label>
+        <input placeholder="Kyiv Bandits" type="text" #unitName>
+        <input class="button-primary" value="Submit" type="submit">
+      </div>
+    </div>
+  </form>
+</div>
+
 <p>
-  unit-entity works!
+  unit-entity works! {{ id | async }}
 </p>
