@@ -10,11 +10,15 @@ import { UnitService } from '../unit.service';
 export class UnitListComponent implements OnInit {
   items: FirebaseListObservable<any>;
 
-  constructor(af: AngularFire, unitService:UnitService) {
+  constructor(public af: AngularFire, private unitService:UnitService) {
     this.items = unitService.getList();
   }
 
   ngOnInit() {
+  }
+
+  remove(key:string) {
+    this.unitService.removeUnit(key);
   }
 
 }

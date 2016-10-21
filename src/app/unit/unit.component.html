@@ -1,3 +1,5 @@
-<p>
-  unit works! {{id | async}}
-</p>
+<h2>{{(unit | async)?.name}}</h2>
+
+<pre>{{unit | async | json}}</pre>
+
+<a role="button" (click)="join()">Join Team</a>

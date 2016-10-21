@@ -1,7 +1,10 @@
+<h2>Team List</h2>
+
 <ul>
   <li *ngFor="let item of items | async">
-    <input type="text" #updatetext [value]="item | json" />
+    <a routerLink="{{item.$key}}">{{item.name}}</a>
+    <a role="button" *ngIf="item.isRemovable" (click)="remove(item.$key)">[x]</a>
   </li>
 </ul>
 
-<a routerLink="create">Create new Unit</a>
+<a routerLink="create">Create new Team</a>
