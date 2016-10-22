@@ -11,8 +11,6 @@ export class UnitService {
   private list;
   private me;
   private unit;
-  private unitJoinActions;
-  private unitJoinActionsObserver;
 
   constructor(private af: AngularFire) {
     this.list = this.af.database.list('/units');
@@ -37,27 +35,42 @@ export class UnitService {
     });
   }
 
-  setUnit(unit) {
-    this.unit = unit;
-    console.log('in setUnit');
-    this.unitJoinActions = Observable.create(function(observer) {
-      this.unitJoinActionsObserver = observer;
-    }.bind(this));
-    // it smells
-    this.unit.subscribe(function(unit) {
-      this.unitJoinActions.subscribe(function() {
-        unit.users.push(this.me.uid);
-        this.list.update(unit.$key, {
-          name: unit.name,
-          users: unit.users
-        });
-        return unit;
-      }.bind(this));
-    }.bind(this));
+  // setUnit(unit) {
+  //   this.unit = unit;
+  //   console.log('in setUnit');
+  //   this.unitJoinActions = Observable.create(function(observer) {
+  //     this.unitJoinActionsObserver = observer;
+  //   }.bind(this));
+  //   // it smells
+  //   this.unit.subscribe(function(unit) {
+  //     this.unitJoinActions.subscribe(function() {
+  //       unit.users.push(this.me.uid);
+  //       this.list.update(unit.$key, {
+  //         name: unit.name,
+  //         users: unit.users
+  //       });
+  //       return unit;
+  //     }.bind(this));
+  //   }.bind(this));
+  // }
+
+  setUnit(unitId) {
+    this.unit = this.list = this.af.database.object('/units/' + unitId);
+    return this.unit;
   }
 
   join() {
-    this.unitJoinActionsObserver.next();
+    let users;
+    this.unit.subscribe(snapshot => {
+      users = snapshot.users;
+    });
+    if (!users.includes(this.me.uid)) {
+      users.push(this.me.uid);
+      console.log(users);
+      this.unit.update({
+        users
+      })
+    }
   }
 
   removeUnit(key:string) {

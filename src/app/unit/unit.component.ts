@@ -15,13 +15,7 @@ export class UnitComponent implements OnInit {
   routeParams;
 
   constructor(route:ActivatedRoute, private unitService:UnitService) {
-    route.params.subscribe(params => {
-      this.routeParams = params
-    });
-    this.unit = this.unitService.getList().map(list => list.find(unit => {
-      return unit.$key === this.routeParams.id;
-    }));
-    this.unitService.setUnit(this.unit);
+    this.unit = this.unitService.setUnit(route.snapshot.params['id']);
   }
 
   join() {
