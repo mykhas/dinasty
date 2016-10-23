@@ -2,4 +2,9 @@
 
 <pre>{{unit | async | json}}</pre>
 
+<div *ngFor="let user of (unit | async)?.users">
+  <span>{{(user | username | async)}}</span>
+  <a role="button" (click)="removeUser(user)">Remove User</a>
+</div>
+
 <a role="button" (click)="join()">Join Team</a>

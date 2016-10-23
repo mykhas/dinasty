@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { UnitService } from './unit.service';
+import { UserService } from '../common/core/user.service';
 import "rxjs/add/operator/map";
 
 @Component({
@@ -20,6 +21,10 @@ export class UnitComponent implements OnInit {
 
   join() {
     this.unitService.join();
+  }
+
+  removeUser(uid:string) {
+    this.unitService.removeUser(uid);
   }
 
   ngOnInit() {

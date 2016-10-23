@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import appRoutes from './app.routes';
+import { CoreModule } from './common/core/core.module';
 import { FooterModule } from './common/footer/footer.module';
 import { HeaderModule } from './common/header/header.module';
 
@@ -25,6 +26,7 @@ const myFirebaseAuthConfig = {
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    CoreModule,
     FooterModule,
     HeaderModule,
     appRoutes,

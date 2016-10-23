@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire } from 'angularfire2';
+import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,13 @@ import { AngularFire } from 'angularfire2';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public af: AngularFire) {}
+  constructor(public af: AngularFire, private userService: UserService) {}
 
   login() {
-    this.af.auth.login();
+    this.af.auth.login().then(response => {
+      console.log('response after auth', response);
+      this.userService.createUser(response);
+    });
   }
 
   logout() {
