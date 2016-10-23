@@ -3,7 +3,7 @@
 <ul>
   <li *ngFor="let item of items | async">
     <a routerLink="{{item.$key}}">{{item.name}}</a>
-    <a role="button" *ngIf="item.isRemovable" (click)="remove(item.$key)">[x]</a>
+    <a role="button" *ngIf="item.isOwner" (click)="remove(item.$key)">[x]</a>
   </li>
 </ul>
 

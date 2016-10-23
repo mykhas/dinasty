@@ -19,8 +19,8 @@ export class UnitService {
 
   getList() {
     return this.list.map(list => list.map(unit => {
-      if (unit.users.includes(this.me.uid)) {
-        unit.isRemovable = true;
+      if (unit.users[0] === this.me.uid) {
+        unit.isOwner = true;
       }
       return unit;
     }));
@@ -36,18 +36,22 @@ export class UnitService {
   }
 
   setUnit(unitId) {
-    this.unit = this.af.database.object('/units/' + unitId);
+    this.unit = this.af.database.object('/units/' + unitId)
+      .map(unit => {
+        if (unit.users[0] === this.me.uid) {
+          unit.isOwner = true;
+        }
+      });
     return this.unit;
   }
 
   join() {
     let users;
     this.unit.subscribe(snapshot => {
-      users = snapshot.users;
+      users = snapshot.users || [];
     });
     if (!users.includes(this.me.uid)) {
       users.push(this.me.uid);
-      console.log(users);
       this.unit.update({
         users
       })
@@ -60,7 +64,6 @@ export class UnitService {
       users = snapshot.users;
     });
     if (users.includes(uid)) {
-      console.log(uid, users.indexOf(uid), users);
       users = users.filter(user => user !== uid);
       this.unit.update({
         users
