@@ -1,16 +1,22 @@
-<h2>{{(unit | async)?.name}}</h2>
-
-<pre>{{unit | async | json}}</pre>
+<h2>
+  {{(unit | async)?.name}}
+  <a role="button" class="btn btn-primary btn-sm" (click)="join()" *ngIf="!(unit | async)?.isMember">Join Team</a>
+</h2>
 
 <div *ngFor="let user of (unit | async)?.users; let i = index">
-  <span>{{(user.uid | username | async)}} ({{user.position}})</span>
-  <div class="btn-group btn-group-xs">
-    <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Gk">Gk</label>
-    <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Df">Df</label>
-    <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Md">Md</label>
-    <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Fw">Fw</label>
+  <div class="row">
+    <div class="col-sm-4">
+      <span>{{(user.uid | username | async)}}</span>
+      <span *ngIf="i === 0">(captain)</span>
+    </div>
+    <div class="col-sm-8">
+      <div class="btn-group btn-group-xs">
+        <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Gk">Gk</label>
+        <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Df">Df</label>
+        <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Md">Md</label>
+        <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Fw">Fw</label>
+      </div>
+      <a class="btn btn-danger btn-xs" role="button" (click)="removeUser(user)" *ngIf="i > 0 && (unit | async)?.isOwner">Remove User</a>
+    </div>
   </div>
-  <a role="button" (click)="removeUser(user)" *ngIf="i > 0 && (unit | async)?.isOwner">Remove User</a>
 </div>
-
-<a role="button" (click)="join()">Join Team</a>

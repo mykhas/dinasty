@@ -44,6 +44,9 @@ export class UnitService {
       if (unit.users[0].uid === this.me.uid) {
         unit.isOwner = true;
       }
+      if (unit.users.filter(user => user.uid === this.me.uid).length) {
+        unit.isMember = true;
+      }
       return unit;
     }.bind(this));
   }
@@ -53,7 +56,7 @@ export class UnitService {
     this.unit.subscribe(snapshot => {
       users = snapshot.users || [];
     });
-    if (!users.includes(this.me.uid)) {
+    if (!users.filter(user => user.uid === this.me.uid).length) {
       users.push({
         uid: this.me.uid
       });
@@ -80,13 +83,14 @@ export class UnitService {
     });
   }
 
-  removeUser(uid:string) {
+  removeUser(user) {
     let users;
     this.unit.subscribe(snapshot => {
       users = snapshot.users;
     });
-    if (users.includes(uid)) {
-      users = users.filter(user => user.uid !== uid);
+    if (users.filter(userInList => user.uid === userInList.uid && userInList.position === user.position).length) {
+      users = users.filter(userInList => user.uid !== userInList.uid || userInList.position !== user.position);
+      console.log('uuu', users)
       this.unit.update({
         users
       })
