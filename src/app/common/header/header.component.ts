@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   login() {
     this.af.auth.login().then(response => {
-      console.log('response after auth', response);
       this.userService.createUser(response);
     });
   }

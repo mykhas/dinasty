@@ -19,7 +19,7 @@ export class UnitService {
 
   getList() {
     return this.list.map(list => list.map(unit => {
-      if (unit.users[0] === this.me.uid) {
+      if (unit.users[0].uid === this.me.uid) {
         unit.isOwner = true;
       }
       return unit;
@@ -30,19 +30,22 @@ export class UnitService {
     return this.list.push({
       name: name,
       users: [
-        this.me.uid
+        {
+          uid: this.me.uid,
+          position: 'Gk'
+        }
       ]
     });
   }
 
   setUnit(unitId) {
-    this.unit = this.af.database.object('/units/' + unitId)
-      .map(unit => {
-        if (unit.users[0] === this.me.uid) {
-          unit.isOwner = true;
-        }
-      });
-    return this.unit;
+    this.unit = this.af.database.object('/units/' + unitId);
+    return this.unit.map(function(unit) {
+      if (unit.users[0].uid === this.me.uid) {
+        unit.isOwner = true;
+      }
+      return unit;
+    }.bind(this));
   }
 
   join() {
@@ -51,7 +54,9 @@ export class UnitService {
       users = snapshot.users || [];
     });
     if (!users.includes(this.me.uid)) {
-      users.push(this.me.uid);
+      users.push({
+        uid: this.me.uid
+      });
       this.unit.update({
         users
       })
@@ -64,7 +69,7 @@ export class UnitService {
       users = snapshot.users;
     });
     if (users.includes(uid)) {
-      users = users.filter(user => user !== uid);
+      users = users.filter(user => user.uid !== uid);
       this.unit.update({
         users
       })

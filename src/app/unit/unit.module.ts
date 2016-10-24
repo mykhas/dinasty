@@ -7,12 +7,14 @@ import { UnitListComponent } from './unit-list/unit-list.component';
 import { UnitEntityComponent } from './unit-entity/unit-entity.component';
 import { UnitService } from './unit.service';
 import { CoreModule } from '../common/core/core.module';
+import { ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     CoreModule,
+    ButtonsModule,
     unitRoutes
   ],
   providers: [UnitService],

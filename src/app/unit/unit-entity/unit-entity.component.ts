@@ -17,7 +17,6 @@ export class UnitEntityComponent implements OnInit {
     private unitService:UnitService,
     private router: Router
   ) {
-    console.log(route.params);
     this.id = route.params.map((p:any) => p.id);
   }
 

@@ -3,7 +3,13 @@
 <pre>{{unit | async | json}}</pre>
 
 <div *ngFor="let user of (unit | async)?.users; let i = index">
-  <span>{{(user | username | async)}}</span>
+  <span>{{(user.uid | username | async)}} ({{user.position}})</span>
+  <div class="btn-group btn-group-xs">
+    <label class="btn btn-primary" [(ngModel)]="user.position" btnRadio="Gk">Gk</label>
+    <label class="btn btn-primary" [(ngModel)]="user.position" btnRadio="Df">Df</label>
+    <label class="btn btn-primary" [(ngModel)]="user.position" btnRadio="Md">Md</label>
+    <label class="btn btn-primary" [(ngModel)]="user.position" btnRadio="Fw">Fw</label>
+  </div>
   <a role="button" (click)="removeUser(user)" *ngIf="i > 0 && (unit | async)?.isOwner">Remove User</a>
 </div>
 

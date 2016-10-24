@@ -14,6 +14,7 @@ export class UnitComponent implements OnInit {
   id;
   unit;
   routeParams;
+  public position: string = '1';
 
   constructor(route:ActivatedRoute, private unitService:UnitService) {
     this.unit = this.unitService.setUnit(route.snapshot.params['id']);
