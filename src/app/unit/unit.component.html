@@ -4,7 +4,7 @@
 </h2>
 
 <div *ngFor="let user of (unit | async)?.users; let i = index">
-  <div class="row">
+  <div class="row user-row">
     <div class="col-sm-4">
       <span>{{(user.uid | username | async)}}</span>
       <span *ngIf="i === 0">(captain)</span>
@@ -16,7 +16,9 @@
         <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Md">Md</label>
         <label class="btn btn-primary" [(ngModel)]="user.position" (ngModelChange)="updateUserPosition(i, user)" btnRadio="Fw">Fw</label>
       </div>
-      <a class="btn btn-danger btn-xs" role="button" (click)="removeUser(user)" *ngIf="i > 0 && (unit | async)?.isOwner">Remove User</a>
+      <div class="btn-group btn-group-xs">
+        <label class="btn btn-danger" (click)="removeUser(user)" *ngIf="i > 0 && (unit | async)?.isOwner">Remove</label>
+      </div>
     </div>
   </div>
 </div>
