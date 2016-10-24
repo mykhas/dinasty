@@ -1,6 +1,6 @@
 <h2>
   {{(unit | async)?.name}}
-  <a role="button" class="btn btn-primary btn-sm" (click)="join()" *ngIf="!(unit | async)?.isMember">Join Team</a>
+  <a role="button" class="btn btn-primary btn-sm" (click)="join()" *ngIf="(unit | async)?.name && !(unit | async)?.isMember">Join Team</a>
 </h2>
 
 <div *ngFor="let user of (unit | async)?.users; let i = index">
