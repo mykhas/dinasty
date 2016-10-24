@@ -63,6 +63,23 @@ export class UnitService {
     }
   }
 
+  updateUser(i:number, user) {
+    let users;
+    this.unit.subscribe(snapshot => {
+      users = snapshot.users;
+    });
+    users.map((userInList, userIndex) => {
+      if(userInList.position === user.position && i != userIndex) {
+        userInList.position = '';
+      }
+      return userInList;
+    });
+    users[i] = user;
+    this.unit.update({
+      users
+    });
+  }
+
   removeUser(uid:string) {
     let users;
     this.unit.subscribe(snapshot => {

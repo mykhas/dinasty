@@ -28,6 +28,10 @@ export class UnitComponent implements OnInit {
     this.unitService.removeUser(uid);
   }
 
+  updateUserPosition(i:number, user) {
+    this.unitService.updateUser(i, user);
+  }
+
   ngOnInit() {
   }
 
